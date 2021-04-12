@@ -1,0 +1,20 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 100
+       , sepChar = "%"
+       , alignSep = "}{"
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = 
+                   [ Run Network "wlp0s20f3" [ "--template", "Net: <tx>kB|<rx>kB", "-L", "1000", "-H", "5000", "--low", "gray", "--normal", "green", "--high", "red"] 10
+                   , Run Cpu ["-L", "3", "-H", "50", "--normal", "green", "--high", "red"] 10
+                   , Run Memory ["-t", "Mem: <usedratio>%"] 10
+                   , Run Swap [] 10
+                   , Run Date "%a, %d-%m-%Y %H:%M:%S" "date" 10
+                   , Run StdinReader
+                   ]
+       , template = "%StdinReader% }{ %cpu% | %memory% | %wlp0s20f3% <fc=#ee9a00>%date%</fc>" 
+       }
